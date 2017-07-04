@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ToggleButton
+        android:id="@+id/playToggle"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_columnWeight="1"
+        android:layout_marginBottom="8dp"
+        android:textOff="Play"
+        android:textOn="Playing"
+        android:textSize="36sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/stationSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/off"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playToggle" />
+
+</LinearLayout>
