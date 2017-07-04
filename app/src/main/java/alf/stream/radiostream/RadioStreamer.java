@@ -3,11 +3,20 @@ package alf.stream.radiostream;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.widget.ProgressBar;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static alf.stream.radiostream.RadioStreamer.RadioStation.*;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.NEWS;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P1;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P2;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P3;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P4;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P5;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P6;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P7;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.P8;
 
 /**
  * Created by Alf on 7/4/2017.
@@ -23,11 +32,13 @@ public class RadioStreamer {
     private MediaPlayer player;
     private Map<RadioStation,String> stations;
     RadioStation currentStation;
+    ProgressBar loadingProgressBar;
 
 
     public RadioStreamer(Activity parentActivity){
         this.parentActivity = parentActivity;
-//        setContentView(R.layout.activity_main);
+        loadingProgressBar = parentActivity.findViewById(R.id.loadingProgressBar);
+
         String[] urls = parentActivity.getResources().getStringArray(R.array.streams);
         stations = new HashMap<>();
 
@@ -44,7 +55,15 @@ public class RadioStreamer {
         currentStation = P6;
     }
 
-
+    private void showLoadingBar(final boolean show){
+        parentActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(show) loadingProgressBar.setVisibility(loadingProgressBar.VISIBLE);
+                else loadingProgressBar.setVisibility(loadingProgressBar.INVISIBLE);
+            }
+        });
+    }
 
     private void updatePlayer(){
         player = MediaPlayer.create(parentActivity, Uri.parse(stations.get(currentStation)));
@@ -55,8 +74,10 @@ public class RadioStreamer {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                showLoadingBar(true);
                 updatePlayer();
                 player.start();
+                showLoadingBar(false);
             }
         }).start();
     }
