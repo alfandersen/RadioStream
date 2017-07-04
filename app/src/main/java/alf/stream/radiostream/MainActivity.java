@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 radioStreamer.setStation(i);
+
                 if(playToggle.isChecked()){
                     ((TextView) stationSpinner.getChildAt(0)).setTextColor(Color.BLACK);
                     stationSpinner.setBackgroundColor(ContextCompat.getColor(context, R.color.on));

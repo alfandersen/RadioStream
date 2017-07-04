@@ -7,15 +7,7 @@ import android.net.Uri;
 import java.util.HashMap;
 import java.util.Map;
 
-import static alf.stream.radiostream.RadioStreamer.RadioStation.NEWS;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P1;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P2;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P3;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P4;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P5;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P6;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P7;
-import static alf.stream.radiostream.RadioStreamer.RadioStation.P8;
+import static alf.stream.radiostream.RadioStreamer.RadioStation.*;
 
 /**
  * Created by Alf on 7/4/2017.
@@ -56,11 +48,17 @@ public class RadioStreamer {
 
     private void updatePlayer(){
         player = MediaPlayer.create(parentActivity, Uri.parse(stations.get(currentStation)));
+
     }
 
     public void start(){
-        updatePlayer();
-        player.start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                updatePlayer();
+                player.start();
+            }
+        }).start();
     }
 
     public void stop(){
@@ -74,7 +72,6 @@ public class RadioStreamer {
             currentStation = station;
             if (player != null && player.isPlaying()) {
                 stop();
-                updatePlayer();
                 start();
             }
         }
