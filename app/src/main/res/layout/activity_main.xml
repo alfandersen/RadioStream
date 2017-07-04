@@ -12,8 +12,6 @@
         android:id="@+id/playToggle"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_columnWeight="1"
-        android:layout_marginBottom="8dp"
         android:textOff="Play"
         android:textOn="Playing"
         android:textSize="36sp"
@@ -21,15 +19,22 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
     <Spinner
         android:id="@+id/stationSpinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/off"
-        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playToggle" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"
